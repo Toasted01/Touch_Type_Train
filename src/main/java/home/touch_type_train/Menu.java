@@ -84,37 +84,37 @@ public class Menu extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(10, 10, 10)
-                        .addComponent(Exit))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(290, 290, 290)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(320, 320, 320)
-                        .addComponent(LettersBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20)
+                        .addComponent(Exit)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(294, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(TutorialBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1)
                             .addGroup(layout.createSequentialGroup()
+                                .addGap(11, 11, 11)
+                                .addComponent(TutorialBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(LettersBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(WordsBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(20, 20, 20)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(ParagrahsBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(299, Short.MAX_VALUE))
+                .addContainerGap(294, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addComponent(Exit)
-                .addGap(174, 174, 174)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 174, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(79, 79, 79)
-                .addComponent(TutorialBTN)
-                .addGap(31, 31, 31)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(LettersBTN)
+                .addGap(67, 67, 67)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(WordsBTN)
-                    .addComponent(ParagrahsBTN))
-                .addContainerGap(290, Short.MAX_VALUE))
+                    .addComponent(ParagrahsBTN)
+                    .addComponent(LettersBTN)
+                    .addComponent(TutorialBTN))
+                .addContainerGap(356, Short.MAX_VALUE))
         );
 
         pack();
@@ -124,7 +124,6 @@ public class Menu extends javax.swing.JFrame {
         Typing typing = new Typing();
         typing.setVisible(true);
         typing.setMode(1);
-        System.out.println(1);
         this.setVisible(false);
     }//GEN-LAST:event_LettersBTNActionPerformed
 
@@ -132,7 +131,6 @@ public class Menu extends javax.swing.JFrame {
         Typing typing = new Typing();
         typing.setVisible(true);
         typing.setMode(2);
-        System.out.println(2);
         this.setVisible(false);
     }//GEN-LAST:event_WordsBTNActionPerformed
 
@@ -140,7 +138,6 @@ public class Menu extends javax.swing.JFrame {
         Typing typing = new Typing();
         typing.setVisible(true);
         typing.setMode(3);
-        System.out.println(3);
         this.setVisible(false);
     }//GEN-LAST:event_ParagrahsBTNActionPerformed
 

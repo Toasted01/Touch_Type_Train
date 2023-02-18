@@ -31,12 +31,13 @@ public class Typing extends javax.swing.JFrame {
      */
     public static int mode = 0;
     private ArrayList<String> textArray = new ArrayList<>();
+    String textDisplay = "";
     int inputPosition = 0;
     int hit = 0;
     int miss = 0;
     int numberCompleted = 0;
-    Instant start;
-    Instant end;
+    Instant start = null;
+    Instant end = null;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -53,8 +54,6 @@ public class Typing extends javax.swing.JFrame {
         TextOutput = new javax.swing.JTextArea();
         jPanel2 = new javax.swing.JPanel();
         TextInput = new javax.swing.JTextField();
-        ColourBlind = new javax.swing.JToggleButton();
-        Magnify = new javax.swing.JToggleButton();
         HitLbl = new javax.swing.JLabel();
         MissLbl = new javax.swing.JLabel();
         TimerLbl = new javax.swing.JLabel();
@@ -85,7 +84,7 @@ public class Typing extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 900, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 870, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -114,43 +113,35 @@ public class Typing extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(TextInput, javax.swing.GroupLayout.PREFERRED_SIZE, 900, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(TextInput)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(9, 9, 9)
-                .addComponent(TextInput, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(TextInput, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
+                .addContainerGap())
         );
-
-        ColourBlind.setText("Colour Blind");
-        ColourBlind.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ColourBlindActionPerformed(evt);
-            }
-        });
-
-        Magnify.setText("Magnify");
-        Magnify.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MagnifyActionPerformed(evt);
-            }
-        });
 
         HitLbl.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         HitLbl.setForeground(new java.awt.Color(0, 255, 0));
-        HitLbl.setText(" ");
+        HitLbl.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        HitLbl.setText("Hits: 0");
+        HitLbl.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        HitLbl.setMaximumSize(new java.awt.Dimension(76, 24));
+        HitLbl.setMinimumSize(new java.awt.Dimension(76, 24));
+        HitLbl.setPreferredSize(new java.awt.Dimension(76, 24));
 
         MissLbl.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         MissLbl.setForeground(new java.awt.Color(255, 0, 0));
-        MissLbl.setText(" ");
+        MissLbl.setText("Misses: 0");
 
         TimerLbl.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
         TimerLbl.setForeground(new java.awt.Color(0, 0, 0));
+        TimerLbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         TimerLbl.setText("0s");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -158,79 +149,45 @@ public class Typing extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(TypingHome)
-                .addGap(215, 215, 215)
-                .addComponent(HitLbl)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(TimerLbl)
-                .addGap(135, 135, 135)
-                .addComponent(MissLbl)
-                .addGap(321, 321, 321))
-            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 20, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(20, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(TypingHome)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(110, 110, 110)
-                        .addComponent(ColourBlind)
-                        .addGap(602, 602, 602)
-                        .addComponent(Magnify)))
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(HitLbl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(TimerLbl)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(MissLbl)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(TypingHome)
-                        .addGap(34, 34, 34))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(MissLbl)
-                            .addComponent(HitLbl)
-                            .addComponent(TimerLbl))
-                        .addGap(26, 26, 26)))
+                .addContainerGap()
+                .addComponent(TypingHome)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(MissLbl)
+                    .addComponent(HitLbl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TimerLbl))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(ColourBlind)
-                    .addComponent(Magnify)))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void ColourBlindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ColourBlindActionPerformed
-
-        if (ColourBlind.isSelected()) {
-            HitLbl.setForeground(Color.BLACK);
-            MissLbl.setForeground(Color.BLACK);
-        } else {
-            HitLbl.setForeground(Color.GREEN);
-            MissLbl.setForeground(Color.RED);
-        }
-
-    }//GEN-LAST:event_ColourBlindActionPerformed
-
-    private void MagnifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MagnifyActionPerformed
-
-        if (Magnify.isSelected()) {
-            Font large = new Font("Sansserif", Font.PLAIN, 28);
-            TextOutput.setFont(large);
-        } else {
-            Font small = new Font("Sansserif", Font.PLAIN, 18);
-            TextOutput.setFont(small);
-        }
-    }//GEN-LAST:event_MagnifyActionPerformed
 
     private void TypingHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TypingHomeActionPerformed
         Menu menu = new Menu();
@@ -253,15 +210,15 @@ public class Typing extends javax.swing.JFrame {
                 type(2, "");
             }            
         }
-        
-        
-
     }//GEN-LAST:event_TextInputKeyPressed
 
     private void TextInputFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TextInputFocusGained
-        TextInput.setText(null);
-        TextOutput.setText(null);        
-        showText();
+        if (start == null)        
+        {
+            TextInput.setText(null);
+            TextOutput.setText(null);
+            showText();
+        }
     }//GEN-LAST:event_TextInputFocusGained
 
     /**
@@ -303,9 +260,7 @@ public class Typing extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JToggleButton ColourBlind;
     private javax.swing.JLabel HitLbl;
-    private javax.swing.JToggleButton Magnify;
     private javax.swing.JLabel MissLbl;
     private javax.swing.JTextField TextInput;
     private javax.swing.JTextArea TextOutput;
@@ -360,8 +315,7 @@ public class Typing extends javax.swing.JFrame {
                     stats.setVisible(true);
 
                     double words = (textArray.size()) / 5.0;
-                    
-                    System.out.println(words + " " + time + " " + hit + " " + miss);
+
                     stats.setStats(words, time, hit, miss);
 
                     this.setVisible(false);
@@ -383,10 +337,8 @@ public class Typing extends javax.swing.JFrame {
      * Used to show text depending on mode
      */
     public void showText() {
-        inputPosition = 0;
         start = Instant.now();
-        Random random = new Random();
-        String textDisplay = "";
+        Random random = new Random();        
         ArrayList<String> splitArray = new ArrayList<>();
 
         switch (mode) {
