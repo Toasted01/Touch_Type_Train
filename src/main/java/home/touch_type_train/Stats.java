@@ -240,14 +240,13 @@ public class Stats extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     // End of variables declaration//GEN-END:variables
 
-    public void setStats(int words, long rawTime, int correct, int incorrect)
+    public void setStats(double words, int rawTime, int correct, int incorrect)
     {
         Container c = getContentPane();
         
-        long timeMath = ((rawTime / 1000));
-        int wpmCalc = 0;
-        
-        wpmCalc = (int) (words*60 / timeMath);
+        double doubleRawTime = rawTime;
+        double timeMath = doubleRawTime / 1000.0;        
+        int wpmCalc = (int) ((words / timeMath)*60.0);
         
         wpm = String.valueOf(wpmCalc);
         time = String.valueOf(timeMath);

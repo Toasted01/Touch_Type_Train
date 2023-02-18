@@ -239,20 +239,22 @@ public class Typing extends javax.swing.JFrame {
     }//GEN-LAST:event_TypingHomeActionPerformed
 
     private void TextInputKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TextInputKeyPressed
-        int code = evt.getKeyCode();
-        String rawInput = KeyEvent.getKeyText(code);
+        char Char = evt.getKeyChar();        
 
-        char Char = evt.getKeyChar();
-        String input = String.valueOf(Char);
-
-        TimerLbl.setText(input);
-
-        if (input.length() == 1) {
+        if(Character.isLetter(Char))
+        {
+            String input = String.valueOf(Char);
             type(1, input);
+            TimerLbl.setText(input);
         }
-        if (rawInput.equals("BACKSPACE")) {
-            type(2, "");
+        else {
+            if(evt.getKeyCode() == KeyEvent.VK_BACK_SPACE)
+            {
+                type(2, "");
+            }            
         }
+        
+        
 
     }//GEN-LAST:event_TextInputKeyPressed
 
@@ -348,17 +350,17 @@ public class Typing extends javax.swing.JFrame {
                     changed++;
                 }
 
-                if (numberCompleted == textArray.size()) {
-                    //endTime = System.currentTimeMillis();
+                if (numberCompleted == textArray.size()) {                    
                     end = Instant.now();
                     Duration duration = Duration.between(start, end);
-                    Long time = duration.toMillis();
-                    //Long time = endTime - startTime;
+                    Long longTime = duration.toMillis();
+                    int time = Math.toIntExact(longTime);
 
                     Stats stats = new Stats();
                     stats.setVisible(true);
 
-                    int words = (textArray.size()) / 5;
+                    double words = (textArray.size()) / 5.0;
+                    
                     System.out.println(words + " " + time + " " + hit + " " + miss);
                     stats.setStats(words, time, hit, miss);
 
